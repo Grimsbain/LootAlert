@@ -1,0 +1,12 @@
+## Interface: 70300
+## Version: 1.0
+## Author: Grimsbain
+## Title: Loot Alert
+## Notes: Alerts you when an item over a certain value is looted.
+## OptionalDeps: TradeSkillMaster, TheUndermineJournal, Auctionator
+
+Config.lua
+Functions.lua
+LootAlert_UMJ.lua
+LootAlert_TSM.lua
+LootAlert_Auctionator.lua
