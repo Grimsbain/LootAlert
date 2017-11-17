@@ -11,5 +11,5 @@ LootAlert.minQuality = 2;
 -- // Tradeskill Master Sources: DBMinBuyout, DBMarket, DBHistorical, DBRegionMinBuyoutAvg, DBRegionMarketAvg,
 -- // DBRegionHistorical, DBRegionSaleAvg, DBGlobalMinBuyoutAvg, DBGlobalMarketAvg, DBGlobalHistorical, DBGlobalSaleAvg
 
-LootAlert.umjSource = "recent"
-LootAlert.tsmSource = "DBMinBuyout"
+LootAlert.umjSource = "recent";
+LootAlert.tsmSource = "DBMinBuyout";
