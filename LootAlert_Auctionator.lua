@@ -21,9 +21,11 @@ local function onEvent(self, event)
 
             -- Gets the quality (common,uncommon,rare,epic...) of the item or defaults to zero if the value comes back nil.
             local lootQuality = select(3,GetItemInfo(lootLink)) or 0;
+            local lootClass = select(12,GetItemInfo(lootLink)) or 0;
+            local lootSubClass = select(13,GetItemInfo(lootLink)) or 0;
 
             -- Checks item quality vs set min quality.
-            if (lootQuality >= minQuality) then
+            if (lootQuality >= minQuality or (lootClass == 15 and lootSubClass == 2)) then
 
                 -- Get Item Value from Auctionator
 
