@@ -10,7 +10,6 @@ if (TSM or UMJ or not ATOR) then return end
 
 local alertTrigger = LootAlert.alertTrigger;
 local minQuality = LootAlert.minQuality;
-local pet = false;
 
 local function onEvent(self, event)
 

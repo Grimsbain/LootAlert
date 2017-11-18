@@ -11,7 +11,6 @@ local item = {}
 local alertTrigger = LootAlert.alertTrigger;
 local minQuality = LootAlert.minQuality;
 local source = LootAlert.umjSource;
-local pet = false;
 
 local function onEvent(self, event)
 

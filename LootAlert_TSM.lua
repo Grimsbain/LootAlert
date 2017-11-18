@@ -9,7 +9,6 @@ local TSMAPI = _G.TSMAPI;
 local alertTrigger = LootAlert.alertTrigger;
 local minQuality = LootAlert.minQuality;
 local source = LootAlert.tsmSource;
-local pet = false;
 
 local function onEvent(self, event)
 
