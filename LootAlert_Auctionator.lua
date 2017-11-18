@@ -26,6 +26,7 @@ local function onEvent(self, event)
             local lootClass = select(12,GetItemInfo(lootLink)) or 0;
             local lootSubClass = select(13,GetItemInfo(lootLink)) or 0;
 
+            -- Checks if the item is a pet or mount.
             if (lootClass == 15 and (lootSubClass == 2 or lootSubClass == 5)) then
                 local str = lootLink
                 RaidNotice_AddMessage(RaidWarningFrame, str, ChatTypeInfo["RAID_WARNING"]);
