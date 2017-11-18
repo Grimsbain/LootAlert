@@ -31,7 +31,7 @@ local function onEvent(self, event)
                 RaidNotice_AddMessage(RaidWarningFrame, str, ChatTypeInfo["RAID_WARNING"]);
                 print(str);
 
-            -- Checks item a BoE and quality vs set min quality.
+            -- Checks if item is BoE and compares item quality to the set minimum quality.
             elseif (not bindOnPickUp and lootQuality >= minQuality) then
 
                 -- Get Item Value from TSM
