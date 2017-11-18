@@ -61,4 +61,4 @@ end
 --Runs when a loot window is opened.
 local addon = CreateFrame('Frame')
 addon:SetScript('OnEvent', onEvent)
-addon:RegisterEvent('LOOT_OPENED')
+addon:RegisterEvent('LOOT_READY')
