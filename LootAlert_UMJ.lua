@@ -17,8 +17,9 @@ local function onEvent(self, event)
 
     for i=1, GetNumLootItems() do
         local lootLink = GetLootSlotLink(i);
+        local bindOnPickUp = IsSoulbound(i);
 
-        if (lootLink ~= nil) then
+        if (lootLink ~= nil and not bindOnPickUp) then
 
             -- Gets the quality (common,uncommon,rare,epic...) of the item or defaults to zero if the value comes back nil.
             local lootQuality = select(3,GetItemInfo(lootLink)) or 0;
@@ -50,15 +51,16 @@ local function onEvent(self, event)
 
                         RaidNotice_AddMessage(RaidWarningFrame, str, ChatTypeInfo["RAID_WARNING"])
                         print(str)
-                        pet = false;
                     end
                 end
             end
+
+            pet = false;
         end
     end
 end
 
 --Runs when a loot window is opened.
 local addon = CreateFrame('Frame')
-addon:SetScript('OnEvent', onEvent)
 addon:RegisterEvent('LOOT_READY')
+addon:SetScript('OnEvent', onEvent)

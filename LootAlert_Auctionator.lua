@@ -49,15 +49,16 @@ local function onEvent(self, event)
 
                         RaidNotice_AddMessage(RaidWarningFrame, str, ChatTypeInfo["RAID_WARNING"]);
                         print(str);
-                        pet = false;
                     end
                 end
             end
+
+            pet = false;
         end
     end
 end
 
 --Runs when a loot window is opened.
 local addon = CreateFrame('Frame')
-addon:SetScript('OnEvent', onEvent)
 addon:RegisterEvent('LOOT_READY')
+addon:SetScript('OnEvent', onEvent)
