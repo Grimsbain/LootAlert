@@ -4,6 +4,7 @@
 ## Title: Loot Alert
 ## Notes: Alerts you when an item over a certain value is looted.
 ## OptionalDeps: TradeSkillMaster, TheUndermineJournal, Auctionator
+## SavedVariables: LootAlertDB
 
 Config.lua
 Functions.lua

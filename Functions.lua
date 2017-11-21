@@ -1,3 +1,5 @@
+local ADDON, LootAlert = ...
+
 local floor = math.floor
 local format = format
 local tonumber = tonumber
@@ -70,4 +72,15 @@ function IsSoulbound(slot)
     end
     tooltip:Hide()
     return false
+end
+
+    -- Set Defaults
+
+LootAlert.RegisterDefaultSetting = function(key,value)
+    if ( LootAlertDB == nil ) then
+        LootAlertDB = {}
+    end
+    if ( LootAlertDB[key] == nil ) then
+        LootAlertDB[key] = value
+    end
 end
