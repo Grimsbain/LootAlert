@@ -53,7 +53,7 @@ local function onEvent(self, event)
     end
 end
 
---Runs when a loot window is opened.
+-- Runs when a loot window is opened.
 local addon = CreateFrame('Frame')
 addon:RegisterEvent('LOOT_READY')
 addon:SetScript('OnEvent', onEvent)

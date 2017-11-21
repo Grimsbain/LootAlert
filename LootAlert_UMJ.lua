@@ -43,7 +43,7 @@ local function onEvent(self, event)
                         local formatedCoins = coins(itemValue,true);
                         local valueInGold = floor(itemValue/10000);
 
-                        -- If item value is worth over 200g it will display a raid warning and a message in chat.
+                        -- If item value is worth over alertTrigger it will display a raid warning and a message in chat.
                         if (valueInGold >= LootAlertDB.alertTrigger) then
                             local str = lootLink .. "|cffFFFFFF : " .. formatedCoins .."|r";
                             RaidNotice_AddMessage(RaidWarningFrame, str, ChatTypeInfo["RAID_WARNING"]);
@@ -56,7 +56,7 @@ local function onEvent(self, event)
     end
 end
 
---Runs when a loot window is opened.
+-- Runs when a loot window is opened.
 local addon = CreateFrame('Frame')
 addon:RegisterEvent('LOOT_READY')
 addon:SetScript('OnEvent', onEvent)
