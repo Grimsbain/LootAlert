@@ -6,8 +6,4 @@
 ## OptionalDeps: TradeSkillMaster, TheUndermineJournal, Auctionator
 ## SavedVariables: LootAlertDB
 
-Config.lua
-Functions.lua
-LootAlert_UMJ.lua
-LootAlert_TSM.lua
-LootAlert_Auctionator.lua
+LootAlert.xml
