@@ -14,8 +14,6 @@
                 if (self.TSM or self.UMJ or self.ATOR) then
                     self:RegisterEvent("LOOT_READY")
                     self.lastTime = 0
-                else
-                    print(L.NoSource)
                 end
             </OnLoad>
             <OnEvent>

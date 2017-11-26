@@ -10,7 +10,7 @@ function LootAlert_OnEvent(self, event, ...)
         local lootLink = GetLootSlotLink(i)
         local bindOnPickUp = LootAlert_IsSoulbound(i)
 
-        if (lootLink ~= nil) then
+        if (lootLink) then
 
             -- Gets item loot quality, class, and sub class.
             local _, _, lootQuality, _, _, _, _, _, _, _, _, lootClass, lootSubClass = GetItemInfo(lootLink) or _, _, 0, _, _, _, _, _, _, _, _, 0, 0
@@ -35,7 +35,7 @@ function LootAlert_OnEvent(self, event, ...)
                 end
 
                 -- Checks to see if value returned is nil or zero.
-                if (itemValue ~= nil and itemValue ~= 0) then
+                if (itemValue and itemValue ~= 0) then
                     -- Formats gold output using coins function.
                     local formatedCoins = LootAlert_Coins(itemValue)
                     local valueInGold = floor(itemValue/10000)

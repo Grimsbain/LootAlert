@@ -18,7 +18,6 @@ L.MinAlertValueLabel = "Minimum Alert Value"
 L.MinAlertQualityLabel = "Minimum Alert Quality"
 L.UMJLabel = "Undermine Journal Source"
 L.TSMLabel = "Trade Skill Master Source"
-L.NoSource = "Loot Alert: Price source not found."
 
 -- Undermine Journal
 L.UMJMarket = "Market"
