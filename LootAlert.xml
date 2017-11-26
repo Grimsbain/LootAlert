@@ -1,7 +1,29 @@
 <Ui>
-    <Script file='Localization.lua' />
-    <Script file='Config.lua' />
-    <Script file='Database.lua' />
-    <Script file='Functions.lua' />
-    <Script file='LootAlert.lua' />
+    <Script file="Localization.lua" />
+    <Script file="Database.lua" />
+    <Script file="Functions.lua" />
+    <Script file="Config.lua" />
+    <Script file="LootAlert.lua" />
+    <Frame name="LootAlertFrame">
+        <Scripts>
+            <OnLoad>
+                self.TSM = IsAddOnLoaded("TradeskillMaster")
+                self.UMJ = IsAddOnLoaded("TheUndermineJournal")
+                self.ATOR = IsAddOnLoaded("Auctionator")
+
+                if (self.TSM or self.UMJ or self.ATOR) then
+                    self:RegisterEvent("LOOT_READY")
+                    self.lastTime = 0
+                else
+                    print(L.NoSource)
+                end
+            </OnLoad>
+            <OnEvent>
+                if (event == "LOOT_READY" and self.lastTime ~= time()) then
+                    LootAlert_OnEvent(self, event, ...)
+                    self.lastTime = time()
+                end
+            </OnEvent>
+        </Scripts>
+    </Frame>
 </Ui>
