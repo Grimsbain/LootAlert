@@ -13,7 +13,9 @@ function LootAlert_OnEvent(self, event, ...)
         if (lootLink) then
 
             -- Gets item loot quality, class, and sub class.
-            local _, _, lootQuality, _, _, _, _, _, _, _, _, lootClass, lootSubClass = GetItemInfo(lootLink) or _, _, 0, _, _, _, _, _, _, _, _, 0, 0
+            local _, _, lootQuality, _, _, _, _, _, _, _, _, lootClass, lootSubClass = GetItemInfo(lootLink)
+
+            if not lootQuality then lootQuality = 0 end
 
             -- Checks if the item is a pet or mount.
             if (lootClass == 15 and (lootSubClass == 2 or lootSubClass == 5)) then
