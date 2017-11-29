@@ -2,9 +2,125 @@
     <Script file="Localization.lua" />
     <Script file="Database.lua" />
     <Script file="Functions.lua" />
-    <Script file="Config.lua" />
     <Script file="LootAlert.lua" />
-    <Frame name="LootAlertFrame">
+    <Frame name="LootAlert">
+        <Layers>
+			<Layer level="ARTWORK">
+				<FontString name="$parentDisplayHeader" text="" inherits="GameFontNormalLarge" justifyH="LEFT" justifyV="TOP">
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="16" y="-16"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+			</Layer>
+		</Layers>
+        <Frames>
+            <Slider name="AlertValueSlider" inherits="OptionsSliderTemplate">
+                <Size x="150" y="17"/>
+ 				<Anchors>
+					<Anchor point="TOPLEFT">
+						<Offset x="24" y="-85"/>
+					</Anchor>
+				</Anchors>
+                <Layers>
+                    <Layer level="ARTWORK">
+                        <FontString name="$parentLabel" inherits="GameFontNormalSmall">
+                            <Anchors>
+                                <Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="0" y="17"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnLoad>
+                        AlertValueSlider_OnLoad(self);
+                    </OnLoad>
+                    <OnValueChanged>
+                        self.value = self:GetValue();
+                        self.text:SetText(self.value.."|TInterface\\MoneyFrame\\UI-GoldIcon:0|t")
+                        if LootAlertDB then LootAlertDB.alertTrigger = tonumber(self.value) end
+                    </OnValueChanged>
+                    <OnEnter>
+                    </OnEnter>
+                </Scripts>
+            </Slider>
+            <Slider name="AlertQualitySlider" inherits="OptionsSliderTemplate">
+                <Size x="150" y="17"/>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="AlertValueSlider">
+                        <Offset>
+                            <AbsDimension x="0" y="-74"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Layers>
+                    <Layer level="ARTWORK">
+                        <FontString name="$parentLabel" inherits="GameFontNormalSmall">
+                            <Anchors>
+                                <Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="0" y="17"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+                <Scripts>
+                    <OnLoad>
+                        AlertQualitySlider_OnLoad(self);
+                    </OnLoad>
+                    <OnValueChanged>
+                        self.value = value
+                        self.text:SetText(LootAlert_GetLootQualityText(self.value))
+                        if LootAlertDB then LootAlertDB.MinQuality = tonumber(self.value) end
+                    </OnValueChanged>
+                    <OnEnter>
+                    </OnEnter>
+                </Scripts>
+            </Slider>
+            <Frame name="SourceDropdown" inherits="UIDropDownMenuTemplate" enableMouse="true">
+				<Anchors>
+					<Anchor point="TOPLEFT" relativeTo="AlertQualitySlider" relativePoint="BOTTOMLEFT">
+						<Offset>
+							<AbsDimension x="-20" y="-45"/>
+						</Offset>
+					</Anchor>
+				</Anchors>
+                <Layers>
+                    <Layer level="BACKGROUND">
+                        <FontString name="$parentTitle" inherits="GameFontNormalSmall">
+                            <Anchors>
+                                <Anchor point="BOTTOMLEFT" relativePoint="TOPLEFT">
+                                    <Offset>
+                                        <AbsDimension x="20" y="5"/>
+                                    </Offset>
+                                </Anchor>
+                            </Anchors>
+                        </FontString>
+                    </Layer>
+                </Layers>
+				<Scripts>
+					<OnLoad>
+                        self.TSM = IsAddOnLoaded("TradeskillMaster")
+                        self.UMJ = IsAddOnLoaded("TheUndermineJournal")
+
+                        if (self.TSM or self.UMJ) then
+                            SourceDropdown_OnLoad(self);
+                        else
+                            self:Hide()
+                        end
+					</OnLoad>
+				</Scripts>
+			</Frame>
+        </Frames>
         <Scripts>
             <OnLoad>
                 self.TSM = IsAddOnLoaded("TradeskillMaster")
@@ -12,8 +128,7 @@
                 self.ATOR = IsAddOnLoaded("Auctionator")
 
                 if (self.TSM or self.UMJ or self.ATOR) then
-                    self:RegisterEvent("LOOT_READY")
-                    self.lastTime = 0
+                    LootAlert_OnLoad(self)
                 end
             </OnLoad>
             <OnEvent>

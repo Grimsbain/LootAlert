@@ -1,4 +1,4 @@
-local _, LootAlert = ...
+local ADDON, LootAlert = ...
 
 local L = {}
 LootAlert.L = L
@@ -14,6 +14,7 @@ end })
 ------------------------------------------------------------------------
 
 -- Option Text
+L.LootAlert = GetAddOnMetadata(ADDON, "Title")
 L.MinAlertValueLabel = "Minimum Alert Value"
 L.MinAlertQualityLabel = "Minimum Alert Quality"
 L.UMJLabel = "Undermine Journal Source"
