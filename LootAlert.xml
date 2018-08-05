@@ -132,10 +132,7 @@
                 end
             </OnLoad>
             <OnEvent>
-                if (event == "LOOT_READY" and self.lastTime ~= time()) then
-                    LootAlert_OnEvent(self, event, ...)
-                    self.lastTime = time()
-                end
+				LootAlert_OnEvent(self, event, ...)
             </OnEvent>
         </Scripts>
     </Frame>

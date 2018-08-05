@@ -1,5 +1,5 @@
-## Interface: 70300
-## Version: 1.0
+## Interface: 80000
+## Version: 1.1
 ## Author: Grimsbain
 ## Title: Loot Alert
 ## Notes: Alerts you when an item over a certain value is looted.

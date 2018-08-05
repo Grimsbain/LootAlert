@@ -11,10 +11,10 @@ function LootAlert_OnLoad(self)
     self.lastTime = 0
 
     -- Set Default Settings
-    LootAlert_RegisterDefaultSetting("alertTrigger", 200)
-    LootAlert_RegisterDefaultSetting("MinQuality", 2)
-    LootAlert_RegisterDefaultSetting("UMJSource", "recent")
-    LootAlert_RegisterDefaultSetting("TSMSource", "DBMinBuyout")
+    LootAlert:RegisterDefaultSetting("alertTrigger", 200)
+    LootAlert:RegisterDefaultSetting("MinQuality", 2)
+    LootAlert:RegisterDefaultSetting("UMJSource", "recent")
+    LootAlert:RegisterDefaultSetting("TSMSource", "DBMinBuyout")
 
     -- Set Panel Title Text
     LootAlertDisplayHeader:SetText(L.LootAlert)
@@ -90,13 +90,15 @@ function SourceDropdown_OnLoad(self)
 end
 
 function LootAlert_OnEvent(self, event, ...)
+	if ( time() <= self.lastTime+1 ) then return end
+
     local itemValue = 0
 
     for i=1, GetNumLootItems() do
         local lootLink = GetLootSlotLink(i)
-        local bindOnPickUp = LootAlert_IsSoulbound(i)
 
-        if (lootLink) then
+        if lootLink then
+			local bindOnPickUp = LootAlert:IsSoulbound(i)
 
             -- Gets item loot quality, class, and sub class.
             local _, _, lootQuality, _, _, _, _, _, _, _, _, lootClass, lootSubClass = GetItemInfo(lootLink)
@@ -114,7 +116,7 @@ function LootAlert_OnEvent(self, event, ...)
 
                 -- Get Item Value
                 if self.TSM then
-                    itemValue = ItemData:GetItemValue(lootLink,LootAlertDB.TSMSource) or 0
+                    itemValue = ItemData:GetItemValue(lootLink, LootAlertDB.TSMSource) or 0
                 elseif self.UMJ then
                     TUJMarketInfo(lootLink,ItemData)
                     itemValue = ItemData[LootAlertDB.UMJSource] or 0
@@ -125,7 +127,7 @@ function LootAlert_OnEvent(self, event, ...)
                 -- Checks to see if value returned is nil or zero.
                 if (itemValue and itemValue ~= 0) then
                     -- Formats gold output using coins function.
-                    local formatedCoins = LootAlert_Coins(itemValue)
+                    local formatedCoins = LootAlert:Coins(itemValue)
                     local valueInGold = floor(itemValue/10000)
 
                     -- If item value is worth over alertTrigger it will display a raid warning and a message in chat.
@@ -138,4 +140,5 @@ function LootAlert_OnEvent(self, event, ...)
             end
         end
     end
+	self.lastTime = time()
 end

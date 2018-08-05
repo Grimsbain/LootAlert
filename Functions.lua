@@ -6,7 +6,7 @@ local format = format
 local tonumber = tonumber
 
 -- Register Default Settings
-function LootAlert_RegisterDefaultSetting(key,value)
+function LootAlert:RegisterDefaultSetting(key,value)
     if ( LootAlertDB == nil ) then
         LootAlertDB = {}
     end
@@ -17,12 +17,13 @@ end
 
 -- Soulbound Function
 local tooltip = CreateFrame("GameTooltip", "LootAlertTooltip", nil, "GameTooltipTemplate")
-function LootAlert_IsSoulbound(slot)
+function LootAlert:IsSoulbound(slot)
     tooltip:SetOwner(UIParent, "ANCHOR_NONE")
     tooltip:SetLootItem(slot)
     tooltip:Show()
     for i = 1,tooltip:NumLines() do
-        if(_G["LootAlertTooltipTextLeft"..i]:GetText() == ITEM_SOULBOUND) then
+        local text = _G["LootAlertTooltipTextLeft"..i]:GetText()
+        if( text == ITEM_SOULBOUND or text == ITEM_BIND_ON_PICKUP) then
             return true
         end
     end
@@ -31,7 +32,7 @@ function LootAlert_IsSoulbound(slot)
 end
 
 -- Formats money for output.
-function LootAlert_Coins(money)
+function LootAlert:Coins(money)
     local iconpath = "Interface\\MoneyFrame\\UI-"
     local goldicon = "%d|T"..iconpath.."GoldIcon:0|t"
     local silvericon = "%s|T"..iconpath.."SilverIcon:0|t"
